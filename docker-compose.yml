@@ -1,0 +1,29 @@
+version: '1'
+
+networks:
+  projectnetwork:
+
+services:
+
+  backend:
+    build:
+      context: ./backEnd
+      dockerfile: Dockerfile
+    container_name: backend
+    networks:
+      - projectnetwork
+    ports:
+      - "5000:5000"
+
+
+  frontend:
+    build:
+      context: ./frontEnd
+      dockerfile: Dockerfile
+    container_name: frontend
+    networks:
+      - projectnetwork
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
