@@ -3,7 +3,7 @@ import time
 import requests
 import json
 
-BACKEND_URL = 'http://localhost:5000'
+BACKEND_URL = 'http://backend:5000'
 
 sentimentMap = {
     0 : "Irrelevant", 1 : "Negative", 2 : "Neutral", 3 : "Positive"

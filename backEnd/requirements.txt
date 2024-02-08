@@ -5,3 +5,4 @@ joblib
 pandas
 psutil
 prometheus_client
+requests

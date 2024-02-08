@@ -1,20 +1,21 @@
-version: '1'
+version: '3.8'
 
 networks:
-  projectnetwork:
+  my-network:
+
 
 services:
-
   backend:
     build:
       context: ./backEnd
       dockerfile: Dockerfile
     container_name: backend
     networks:
-      - projectnetwork
+      - my-network
     ports:
       - "5000:5000"
 
+    
 
   frontend:
     build:
@@ -22,8 +23,25 @@ services:
       dockerfile: Dockerfile
     container_name: frontend
     networks:
-      - projectnetwork
+      - my-network
     ports:
       - "8501:8501"
     depends_on:
       - backend
+    links:
+      - "backend:backend"
+  
+  prometheus:
+    build:
+      context: ./prometheusMonitoring
+      dockerfile: Dockerfile
+    container_name: prometheus
+    networks:
+      - my-network
+    ports:
+      - 9090:9090
+    depends_on:
+      - backend
+    links:
+      - "backend:backend"
+

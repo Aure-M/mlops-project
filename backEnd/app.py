@@ -4,6 +4,7 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import joblib
 import psutil
+import json
 from prometheus_client import CollectorRegistry, Gauge, Counter, pushadd_to_gateway, generate_latest
 
 
@@ -25,10 +26,31 @@ sentimentMap = {
     0 : "Irrelevant", 1 : "Negative", 2 : "Neutral", 3 : "Positive"
 }
 
+
+with open("./mlModel/versions/active_couple_of_model.json", 'r') as file1:
+    models = json.load(file1)
+
+# download models["decisionTree_modelId"]
+with open("./mlModel/versions/models/decisionTree/models.json", 'r') as file2:
+    decisionTrees = json.load(file2)
+
+decision_tree_modelData = decisionTrees[models["decisionTree_modelId"]]
+
+
+# download models["vectorizer_modelID"]
+with open("./mlModel/versions/models/vectorizers/models.json", 'r') as file3:
+    vectorizers = json.load(file3)
+
+vec_modelData = vectorizers[models["vectorizer_modelID"]]
+
 print("Loading Decision Tree model")
-model = joblib.load('./mlModel/versions/models/model.pkl')
+model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
 print("Loading Vectorizer model")
-tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizer.joblib')
+tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
+
+file1.close()
+file2.close()
+file3.close()
 
 english_stop_words = set(stopwords.words('english'))
 stemmer = PorterStemmer()
