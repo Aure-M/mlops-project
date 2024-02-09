@@ -31,4 +31,4 @@ jobs:
          push: ${{ github.ref == 'refs/heads/main' }}
      - name: Run tests
        run: |
-          python -m unittest discover -s backEnd -p '*_test.py'
+          python -m unittest discover -s backEnd -p '*test.py'
