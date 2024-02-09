@@ -1,0 +1,36 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  backend_tests:
+    runs-on: ubuntu-22.04
+    steps:
+     - name: Checkout code
+       uses: actions/checkout@v2.5.0
+       
+     - name: Set up Python
+       uses: actions/setup-python@v2
+       with:
+         python-version: '3.x' # Choose the appropriate Python version
+
+     - name: Install dependencies
+       run: |
+          pip install nltk joblib streamlit requests flask flask_testing psutil prometheus_client scikit-learn pandas
+
+     - name: Download NLTK data
+       run: python -c "import nltk; nltk.download('stopwords')"
+
+     - name: Download models 
+       working-directory: ./backEnd
+       run: python model_preparation.py
+     
+     - name: Run tests
+       working-directory: ./backEnd
+       run: python -m unittest test.py

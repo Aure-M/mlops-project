@@ -5,7 +5,8 @@ on:
     branches:
       - main
   pull_request:
-
+    branches:
+      - main
 jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-22.04
@@ -29,7 +30,3 @@ jobs:
          context: ./frontEnd
          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest         
          push: ${{ github.ref == 'refs/heads/main' }}
-     - name: Run tests
-       run: |
-          pip install nltk joblib streamlit requests flask
-          python -m unittest discover -s backEnd -p '*test.py'

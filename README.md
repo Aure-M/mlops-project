@@ -45,6 +45,7 @@ For the moment, the pipeline is automated to push docker images and run tests. A
  
 2. **Run docker-compose**:
    - Run (`docker-compose up`) to create the 3 containers needed for each task
+   - In case you don't have the model installed, go to the files `/backEnd/mlModel/versions/models/decisionTree/models.json` & `/backEnd/mlModel/versions/models/vectorizers/models.json` and set the property `isAlreadyTested` to `false`. That way while building backend image the models will be downloaded and tested on the test dataset loacted in `backEnd/mlModel/data/twitter_performance_1.csv`.
  
 3. **Access the Application**:
    - Access the application in your web browser at `http://localhost:8501` for the frontend and `http://localhost:9090` for the monitoring with prometheus.

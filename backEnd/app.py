@@ -27,16 +27,19 @@ sentimentMap = {
 
 
 
-decision_tree_modelData = getDecisionModelsJsonData()
-vec_modelData = getVectorizersJsonData()
-
-print("Loading Decision Tree model")
-model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
-print("Loading Vectorizer model")
-tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
 
 
+try:
+    decision_tree_modelData = getDecisionModelsJsonData()
+    vec_modelData = getVectorizersJsonData()
 
+    print("Loading Decision Tree model")
+    model = joblib.load('./mlModel/versions/models/decisionTree/'+decision_tree_modelData["name"])
+    print("Loading Vectorizer model")
+    tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/'+vec_modelData["name"])
+except Exception as e:
+    print("{}|{}".format(decision_tree_modelData["name"], vec_modelData["name"]))
+    raise e
 
 
 @app.route('/metrics')
