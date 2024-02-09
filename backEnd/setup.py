@@ -22,7 +22,7 @@ nltk.download('averaged_perceptron_tagger')
 
 
 
-""" with open("./mlModel/versions/active_couple_of_model.json", 'r') as file1:
+with open("./mlModel/versions/active_couple_of_model.json", 'r') as file1:
     models = json.load(file1)
 
 # download models["vectorizer_modelID"]
@@ -40,11 +40,8 @@ with open("./mlModel/versions/models/decisionTree/models.json", 'r') as file2:
 decision_tree_modelData = decisionTrees[models["decisionTree_modelId"]]
 print("Downloading Decision Tree model")
 download_file(decision_tree_modelData["directUri"], "./mlModel/versions/models/decisionTree", decision_tree_modelData["name"])
- """
 
 # Model performance if isAlreadyTested == False
-decision_tree_modelData = getDecisionModelsJsonData()
-vec_modelData = getVectorizersJsonData()
 
 if not decision_tree_modelData["isAlreadyTested"]:
 
