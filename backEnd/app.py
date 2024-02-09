@@ -37,9 +37,9 @@ try:
     model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
     print("Loading Vectorizer model")
     tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
-except Exception:
-    raise Exception("{}|{}".format(decision_tree_modelData["name"], vec_modelData["name"]))
-
+except Exception as e:
+    print("{}|{}".format(decision_tree_modelData["name"], vec_modelData["name"]))
+    raise e
 
 
 @app.route('/metrics')
