@@ -1,7 +1,9 @@
 import unittest
 from utils import preprocess_text, getDecisionModelsJsonData, getVectorizersJsonData
 import joblib
+import nltk
 
+nltk.download('stopwords')
 
 decision_tree_modelData = getDecisionModelsJsonData()
 vec_modelData = getVectorizersJsonData()
