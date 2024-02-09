@@ -1,0 +1,19 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-22.04
+    steps:
+     - name: Checkout code
+       uses: actions/checkout@v2.5.0
+       
+     - name: Run tests
+       run: |
+          pip install nltk joblib streamlit requests flask
+          python -m unittest discover -s backEnd -p '*test.py'
