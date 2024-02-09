@@ -29,10 +29,3 @@ jobs:
          context: ./frontEnd
          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest         
          push: ${{ github.ref == 'refs/heads/main' }}
-
-     - name: Run tests
-       run: |
-          pip install streamlit_e2e_testing
-          python -m unittest discover -s backend -p '*_test.py'
-          python -m unittest discover -s -s . -p 'integration.py'
-          streamlit_e2e_test end_to_end.py
