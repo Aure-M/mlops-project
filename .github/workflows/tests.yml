@@ -20,11 +20,16 @@ jobs:
 
      - name: Install dependencies
        run: |
-          pip install nltk joblib streamlit requests flask
+          pip install nltk joblib streamlit requests flask flask_testing psutil prometheus_client scikit-learn pandas
 
      - name: Download NLTK data
        run: python -c "import nltk; nltk.download('stopwords')"
 
+     - name: Download models 
+       working-directory: ./backEnd
+       run: python model_preparation.py
+     
      - name: Run tests
-       run: python -m unittest discover -s backEnd -p '*test.py'
+       working-directory: ./backEnd
+       run: python -m unittest discover -p '*test.py'
 
