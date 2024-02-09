@@ -8,8 +8,8 @@ nltk.download('stopwords')
 decision_tree_modelData = getDecisionModelsJsonData()
 vec_modelData = getVectorizersJsonData()
 
-model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
-tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
+model = joblib.load('./backEnd/mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
+tfidf_vectorizer = joblib.load('./backEnd/mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
 
 
 
