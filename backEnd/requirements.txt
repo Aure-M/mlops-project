@@ -6,3 +6,4 @@ pandas
 psutil
 prometheus_client
 requests
+flask_testing
