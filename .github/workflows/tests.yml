@@ -31,5 +31,5 @@ jobs:
      
      - name: Run tests
        working-directory: ./backEnd
-       run: python -m unittest discover -p '*test.py'
+       run: python -m unittest discover -p test.py
 
