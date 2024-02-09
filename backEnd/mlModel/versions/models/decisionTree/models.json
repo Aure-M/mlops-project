@@ -1,11 +1,18 @@
 [
     {
-        "modelId":0,
+        "modelId": 0,
         "name": "model_0.pkl",
-        "directUri" : "https://www.dropbox.com/scl/fi/wg1lyfyrvx6nl6gf2yy73/model.pkl?rlkey=dqomgaux36858oux21vtl7wv3&dl=1",
-        "secondUri" : "https://efrei365net-my.sharepoint.com/:u:/g/personal/marc-aurel-sewedo_alioza_efrei_net/EYlHUvtICAZJrmAhGD2CpEgBdC-qwXfZLCFPADfwOYxx-g?e=TF6dsD",
-        "isAlreadyTested" : false,
-        "buildDate" : "",
-        "performanceMetrics" : {}
+        "directUri": "https://www.dropbox.com/scl/fi/wg1lyfyrvx6nl6gf2yy73/model.pkl?rlkey=dqomgaux36858oux21vtl7wv3&dl=1",
+        "secondUri": "https://efrei365net-my.sharepoint.com/:u:/g/personal/marc-aurel-sewedo_alioza_efrei_net/EYlHUvtICAZJrmAhGD2CpEgBdC-qwXfZLCFPADfwOYxx-g?e=TF6dsD",
+        "isAlreadyTested": true,
+        "buildDate": "",
+        "performanceMetrics": {
+            "trainDataVersion": 1,
+            "modelMetrics": {
+                "Accuracy": 0.7,
+                "Precision": 0.5,
+                "F1_score": 0.41666666666666663
+            }
+        }
     }
 ]

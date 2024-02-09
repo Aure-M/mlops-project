@@ -1,8 +1,14 @@
 import unittest
-from app import preprocess_text, model
+from utils import preprocess_text, getDecisionModelsJsonData, getVectorizersJsonData
 import joblib
 
-tfidf_vectorizer = joblib.load('vectorizer.pkl')
+
+decision_tree_modelData = getDecisionModelsJsonData()
+vec_modelData = getVectorizersJsonData()
+
+model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
+tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
+
 
 
 class TestPreprocessText(unittest.TestCase):
@@ -25,7 +31,7 @@ class TestSentimentPrediction(unittest.TestCase):
         self.assertIn('sentiment', data)
         self.assertEqual(data['sentiment'], 'Positive')
         
-  def test_sentiment_prediction_negative(self):
+    def test_sentiment_prediction_negative(self):
           response = self.app.post('/predict', json={'text': 'I hate it this is so bad'})
           self.assertEqual(response.status_code, 200)
           data = response.get_json()
@@ -33,7 +39,7 @@ class TestSentimentPrediction(unittest.TestCase):
           self.assertEqual(data['sentiment'], 'Negative')
           
 
-  def test_sentiment_prediction_neutral(self):
+    def test_sentiment_prediction_neutral(self):
           response = self.app.post('/predict', json={'text': 'I hate that this easy mayhem modifier event on mayhem won’t last forever.'})
           self.assertEqual(response.status_code, 200)
           data = response.get_json()

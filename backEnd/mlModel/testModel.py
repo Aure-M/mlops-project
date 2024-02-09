@@ -4,6 +4,8 @@ from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import joblib
 import pandas as pd
+from flask import Flask
+
 
 # Load the pre-trained model
 model = joblib.load('./versions/models/model.pkl')

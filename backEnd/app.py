@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import re
-from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+from utils import preprocess_text, getDecisionModelsJsonData, getVectorizersJsonData
 import joblib
 import psutil
 import json
@@ -27,51 +26,16 @@ sentimentMap = {
 }
 
 
-with open("./mlModel/versions/active_couple_of_model.json", 'r') as file1:
-    models = json.load(file1)
 
-# download models["decisionTree_modelId"]
-with open("./mlModel/versions/models/decisionTree/models.json", 'r') as file2:
-    decisionTrees = json.load(file2)
-
-decision_tree_modelData = decisionTrees[models["decisionTree_modelId"]]
-
-
-# download models["vectorizer_modelID"]
-with open("./mlModel/versions/models/vectorizers/models.json", 'r') as file3:
-    vectorizers = json.load(file3)
-
-vec_modelData = vectorizers[models["vectorizer_modelID"]]
+decision_tree_modelData = getDecisionModelsJsonData()
+vec_modelData = getVectorizersJsonData()
 
 print("Loading Decision Tree model")
 model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
 print("Loading Vectorizer model")
 tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
 
-file1.close()
-file2.close()
-file3.close()
 
-english_stop_words = set(stopwords.words('english'))
-stemmer = PorterStemmer()
-
-
-def preprocess_text(text):
-    # Convert to lowercase
-    text = text.lower()
-    # Remove some characters (e.g., @)
-    text = re.sub(r'(@)', ' ', text)
-    # Remove special characters and digits
-    text = re.sub(r'[^a-zA-Z\s]', '', text)
-    # Remove stopwords
-    text = ' '.join([
-                word
-                for word in text.split()
-                if word not in english_stop_words
-            ])
-    # Perform stemming
-    text = ' '.join([stemmer.stem(word) for word in text.split()])
-    return text
 
 
 
