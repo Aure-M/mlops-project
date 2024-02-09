@@ -26,5 +26,6 @@ jobs:
        run: python -c "import nltk; nltk.download('stopwords')"
 
      - name: Run tests
+       working-directory: ./backEnd
        run: python -m unittest discover -s backEnd -p '*test.py'
 
