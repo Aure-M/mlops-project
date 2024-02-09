@@ -7,14 +7,14 @@ from app import app
 
 nltk.download('stopwords')
 
-decision_tree_modelData = getDecisionModelsJsonData()
-vec_modelData = getVectorizersJsonData()
+try:
+    decision_tree_modelData = getDecisionModelsJsonData()
+    vec_modelData = getVectorizersJsonData()
 
-print(decision_tree_modelData["name"])
-print(vec_modelData["name"])
-model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
-tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
-
+    model = joblib.load('./mlModel/versions/models/decisionTree/{}'.format(decision_tree_modelData["name"]))
+    tfidf_vectorizer = joblib.load('./mlModel/versions/models/vectorizers/{}'.format(vec_modelData["name"]))
+except:
+    raise Exception("{}--{}".format(decision_tree_modelData["name"], vec_modelData["name"]))
 
 sentimentMap = {
         "Irrelevant": 0, "Negative": 1, "Neutral" : 2, "Positive": 3
